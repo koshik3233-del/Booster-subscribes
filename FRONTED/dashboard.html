@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - YTSubBoost</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <i class="fab fa-youtube"></i>
+                <h3>YTSubBoost</h3>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="active">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="#">
+                    <i class="fas fa-plus-circle"></i> Add Subscribers
+                </a>
+                <a href="deposit.html">
+                    <i class="fas fa-wallet"></i> Deposit
+                </a>
+                <a href="#">
+                    <i class="fas fa-history"></i> History
+                </a>
+                <a href="#">
+                    <i class="fas fa-chart-bar"></i> Analytics
+                </a>
+                <a href="#">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+                <a href="index.html">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="top-bar">
+                <h2>Dashboard</h2>
+                <div class="user-info">
+                    <span>Welcome, John Doe</span>
+                    <div class="balance">
+                        <i class="fas fa-wallet"></i>
+                        <span>Balance: ₹<span id="userBalance">100</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Total Subscribers</h3>
+                    <p id="totalSubs">5,000</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-rupee-sign"></i>
+                    <h3>Total Spent</h3>
+                    <p id="totalSpent">₹100</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-fire"></i>
+                    <h3>Active Orders</h3>
+                    <p id="activeOrders">3</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Completed</h3>
+                    <p id="completedOrders">12</p>
+                </div>
+            </div>
+
+            <!-- YouTube Channel Input -->
+            <div class="input-section">
+                <h3><i class="fab fa-youtube"></i> Add YouTube Channel</h3>
+                <div class="channel-input">
+                    <input type="text" id="youtubeLink" 
+                           placeholder="https://www.youtube.com/channel/UCxxxxxxxxxxxxxxxx" 
+                           pattern="^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$">
+                    <button id="verifyChannel" class="verify-btn">
+                        <i class="fas fa-check"></i> Verify
+                    </button>
+                </div>
+                <div id="channelInfo" class="channel-info" style="display: none;">
+                    <img src="" alt="Channel Thumbnail" id="channelThumb">
+                    <div>
+                        <h4 id="channelName">Channel Name</h4>
+                        <p id="channelSubs">Subscribers: 0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subscriber Package Selection -->
+            <div class="package-section">
+                <h3><i class="fas fa-box-open"></i> Select Package</h3>
+                <div class="package-grid">
+                    <div class="package-card" data-subs="50" data-price="1">
+                        <h4>50 Subscribers</h4>
+                        <div class="price">₹1</div>
+                        <p>Instant Delivery</p>
+                        <button class="select-btn">Select</button>
+                    </div>
+                    <div class="package-card" data-subs="500" data-price="10">
+                        <h4>500 Subscribers</h4>
+                        <div class="price">₹10</div>
+                        <p>Best Value</p>
+                        <button class="select-btn">Select</button>
+                    </div>
+                    <div class="package-card" data-subs="1000" data-price="20">
+                        <h4>1,000 Subscribers</h4>
+                        <div class="price">₹20</div>
+                        <p>Popular Choice</p>
+                        <button class="select-btn">Select</button>
+                    </div>
+                    <div class="package-card" data-subs="5000" data-price="100">
+                        <h4>5,000 Subscribers</h4>
+                        <div class="price">₹100</div>
+                        <p>Premium Package</p>
+                        <button class="select-btn">Select</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="order-summary">
+                <h3><i class="fas fa-shopping-cart"></i> Order Summary</h3>
+                <div class="summary-content">
+                    <div class="summary-item">
+                        <span>YouTube Channel:</span>
+                        <span id="summaryChannel">Not Selected</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Subscribers:</span>
+                        <span id="summarySubs">0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Price:</span>
+                        <span id="summaryPrice">₹0</span>
+                    </div>
+                    <div class="summary-item total">
+                        <span>Total:</span>
+                        <span id="summaryTotal">₹0</span>
+                    </div>
+                    <button id="confirmOrder" class="confirm-btn" disabled>
+                        <i class="fas fa-rocket"></i> Boost Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Real-time Updates -->
+            <div class="realtime-updates">
+                <h3><i class="fas fa-sync-alt"></i> Real-time Updates</h3>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span id="currentSubs">0</span>/<span id="targetSubs">0</span> Subscribers Added
+                    </div>
+                </div>
+                <div class="timer">
+                    <i class="fas fa-clock"></i>
+                    <span>Estimated Time: <span id="estimatedTime">0</span> seconds</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

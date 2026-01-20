@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit - YTSubBoost</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <i class="fab fa-youtube"></i>
+                <h3>YTSubBoost</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="deposit.html" class="active">
+                    <i class="fas fa-wallet"></i> Deposit
+                </a>
+                <a href="index.html">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </nav>
+        </div>
+
+        <div class="main-content">
+            <div class="top-bar">
+                <h2>Deposit Funds</h2>
+                <div class="user-info">
+                    <div class="balance">
+                        <i class="fas fa-wallet"></i>
+                        <span>Balance: ₹<span id="depositBalance">100</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="deposit-container">
+                <div class="deposit-methods">
+                    <h3><i class="fas fa-credit-card"></i> Payment Methods</h3>
+                    <div class="method-grid">
+                        <div class="method-card active" data-method="upi">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>UPI</span>
+                        </div>
+                        <div class="method-card" data-method="card">
+                            <i class="fas fa-credit-card"></i>
+                            <span>Credit/Debit Card</span>
+                        </div>
+                        <div class="method-card" data-method="netbanking">
+                            <i class="fas fa-university"></i>
+                            <span>Net Banking</span>
+                        </div>
+                        <div class="method-card" data-method="paytm">
+                            <i class="fas fa-wallet"></i>
+                            <span>Paytm Wallet</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="deposit-amount">
+                    <h3><i class="fas fa-rupee-sign"></i> Select Amount</h3>
+                    <div class="amount-grid">
+                        <div class="amount-option" data-amount="10">
+                            ₹10
+                            <small>500 Subscribers</small>
+                        </div>
+                        <div class="amount-option" data-amount="50">
+                            ₹50
+                            <small>2,500 Subscribers</small>
+                        </div>
+                        <div class="amount-option active" data-amount="100">
+                            ₹100
+                            <small>5,000 Subscribers</small>
+                        </div>
+                        <div class="amount-option" data-amount="500">
+                            ₹500
+                            <small>25,000 Subscribers</small>
+                        </div>
+                        <div class="amount-option" data-amount="1000">
+                            ₹1,000
+                            <small>50,000 Subscribers</small>
+                        </div>
+                        <div class="amount-option" data-amount="5000">
+                            ₹5,000
+                            <small>250,000 Subscribers</small>
+                        </div>
+                    </div>
+
+                    <div class="custom-amount">
+                        <label for="customAmount">Custom Amount (Min ₹10):</label>
+                        <input type="number" id="customAmount" min="10" step="10" placeholder="Enter amount">
+                    </div>
+                </div>
+
+                <div class="payment-details">
+                    <h3><i class="fas fa-info-circle"></i> Payment Details</h3>
+                    <div class="details-content">
+                        <div class="detail-item">
+                            <span>Selected Amount:</span>
+                            <span id="selectedAmount">₹100</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>Payment Method:</span>
+                            <span id="selectedMethod">UPI</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>Subscribers You'll Get:</span>
+                            <span id="subscribersCount">5,000</span>
+                        </div>
+                        <div class="detail-item total">
+                            <span>Total to Pay:</span>
+                            <span id="totalAmount">₹100</span>
+                        </div>
+
+                        <!-- UPI Payment Details -->
+                        <div id="upiDetails" class="method-details">
+                            <h4>Pay via UPI</h4>
+                            <div class="upi-qr">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=ytsubboost@upi&pn=YTSubBoost&am=100&cu=INR" 
+                                     alt="UPI QR Code">
+                            </div>
+                            <div class="upi-id">
+                                <strong>UPI ID:</strong> ytsubboost@upi
+                                <button class="copy-btn" data-text="ytsubboost@upi">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Card Payment Details -->
+                        <div id="cardDetails" class="method-details" style="display: none;">
+                            <div class="card-form">
+                                <input type="text" placeholder="Card Number" maxlength="16">
+                                <div class="card-row">
+                                    <input type="text" placeholder="MM/YY" maxlength="5">
+                                    <input type="text" placeholder="CVV" maxlength="3">
+                                </div>
+                                <input type="text" placeholder="Cardholder Name">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="proceedPayment" class="pay-btn">
+                        <i class="fas fa-lock"></i> Proceed to Pay ₹<span id="payAmount">100</span>
+                    </button>
+                </div>
+
+                <!-- Real-time Transaction Status -->
+                <div class="transaction-status">
+                    <h3><i class="fas fa-spinner fa-spin"></i> Transaction Status</h3>
+                    <div class="status-timeline">
+                        <div class="status-step active">
+                            <div class="step-icon">1</div>
+                            <span>Payment Initiated</span>
+                        </div>
+                        <div class="status-step">
+                            <div class="step-icon">2</div>
+                            <span>Processing</span>
+                        </div>
+                        <div class="status-step">
+                            <div class="step-icon">3</div>
+                            <span>Completed</span>
+                        </div>
+                    </div>
+                    <div class="status-message" id="statusMessage">
+                        Waiting for payment...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
